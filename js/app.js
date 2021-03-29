@@ -1,6 +1,6 @@
 'use strict';
 
-let everyThing=[];
+// let everyThing=[];
 let keywordArr=[];
 $.ajax('data/page-1.json')
 .then(hornsData => {
@@ -9,8 +9,11 @@ $.ajax('data/page-1.json')
       // console.log(val);
       let newhorn = new Horn(val);
       newhorn.display();
-      newhorn.keywordList();
+      
   })
+let everyThing=[...new Set (keywordArr)];
+console.log(everyThing);
+everyThing.forEach(item=>filterOption(item))
   $('.horn-template').first().remove();
 })
 
@@ -20,41 +23,41 @@ function Horn(hornNew) {
   this.keyword=hornNew.keyword;
   this.horns=hornNew.horns;
   this.image_url=hornNew.image_url;
-  everyThing.push(this);
   keywordArr.push(this.keyword);
 
 }
-console.log(everyThing);
+console.log(keywordArr);
 
 Horn.prototype.display = function () {
-  let hornClone = $('#photo-template').first().clone();
+  let hornClone = $('.photo-template').first().clone();
   hornClone.find('h2').text(this.title);
   console.log('hornClone',hornClone);
   hornClone.find('p').text(this.description);
   hornClone.find('img').attr('src', this.image_url);
-  hornClone.attr('class', `${this.keyword} visible`);
-  hornClone.removeAttr('id');
-
-
-
-    $('main').append(hornClone);
+  console.log(this.keyword);
+  hornClone.addClass(this.keyword);
+  // hornClone.attr('class', `${this.keyword} visible`);
+    $('.container').append(hornClone);
 
 }
 
-Horn.prototype.keywordList =function(){
-  let $listClone =$('option').first().clone();
-  $listClone.attr('value',this.keyword);
-  $listClone.text(this.keyword);
-  $('select').append($listClone);
-
+const filterOption=option=>{
+  console.count('enter');
+  $('select').append(`<option>${option}</option`);
 }
+
+
 
 $('select').on('change', function(event){
-  let options = $('select').find(':selected').text()
-  event.preventDefault();
-  $('h2').hide();
-  $('img').hide();
-  $('p').hide();
-  $(options).show();
+ let value= `${$(this).val()}`;
+ $('.photo-template').hide();
+ $(`.${value}`).show();
+  
+  // let options = $('select').find(':selected').text()
+  // event.preventDefault();
+  // $('h2').hide();
+  // $('img').hide();
+  // $('p').hide();
+  // $(options).show();
 
 });

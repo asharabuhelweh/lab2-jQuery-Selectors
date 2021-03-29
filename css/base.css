@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@1,700&display=swap');
+
+*{
+  box-sizing: border-box;
+  font-family: 'Lora', serif;
+
+}
+
+body {
+  background: #fff;
+width: 960px;
+margin: auto;
+margin-top: 2em;
+}
+main{
+  margin: auto;
+}
+  
