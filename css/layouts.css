@@ -1,6 +1,6 @@
 
 
-.container > div {
+main > div {
   /* margin: 20px; */
   border: 0.5px solid rgb(95, 95, 95);
   height: 340px;
@@ -28,7 +28,7 @@ h1{
   padding-bottom: 20px;
 }
 
-.container > div{ float: left;  width: clac(100%/3)}
+main > div{ float: left;  width: clac(100%/3)}
 
 footer{
   clear: both;

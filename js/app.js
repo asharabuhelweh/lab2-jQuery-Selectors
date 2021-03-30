@@ -8,13 +8,18 @@ $.ajax('data/page-1.json')
   hornsData.forEach(val => {
       // console.log(val);
       let newhorn = new Horn(val);
+      console.log(newhorn);
+      // if(newhorn.keyword==="narwhal"){
+      //   newhorn.display();
+
+      // }
       newhorn.display();
       
   })
 let everyThing=[...new Set (keywordArr)];
 console.log(everyThing);
 everyThing.forEach(item=>filterOption(item))
-  $('.horn-template').first().remove();
+  $('.photo-template').first().remove();
 })
 
 function Horn(hornNew) {
@@ -29,15 +34,20 @@ function Horn(hornNew) {
 console.log(keywordArr);
 
 Horn.prototype.display = function () {
-  let hornClone = $('.photo-template').first().clone();
-  hornClone.find('h2').text(this.title);
-  console.log('hornClone',hornClone);
-  hornClone.find('p').text(this.description);
-  hornClone.find('img').attr('src', this.image_url);
-  console.log(this.keyword);
-  hornClone.addClass(this.keyword);
-  // hornClone.attr('class', `${this.keyword} visible`);
-    $('.container').append(hornClone);
+  let $photoTemplate = $('.photo-templateM').html();
+  let html = Mustache.render($photoTemplate, this);
+  console.log(html);
+  $('main').append(html);
+
+  // let hornClone = $('.photo-template').first().clone();
+  // hornClone.find('h2').text(this.title);
+  // console.log('hornClone',hornClone);
+  // hornClone.find('p').text(this.description);
+  // hornClone.find('img').attr('src', this.image_url);
+  // console.log(this.keyword);
+  // hornClone.addClass(this.keyword);
+  // // hornClone.attr('class', `${this.keyword} visible`);
+  //   $('.container').append(hornClone);
 
 }
 
@@ -50,7 +60,7 @@ const filterOption=option=>{
 
 $('select').on('change', function(event){
  let value= `${$(this).val()}`;
- $('.photo-template').hide();
+ $(`.photo-template`).hide();
  $(`.${value}`).show();
   
   // let options = $('select').find(':selected').text()
